@@ -3,6 +3,7 @@
     "name": "Vista Pool",
     "config_flow": true,
     "documentation": "https://github.com/tellerbop/havistapool",
+    "issue_tracker": "https://github.com/tellerbop/havistapool/issues",
     "requirements": [],
     "dependencies": [],
     "codeowners": ["@tellerbop"]
