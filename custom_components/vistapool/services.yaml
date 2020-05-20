@@ -1,0 +1,15 @@
+# Describes the format for available services for vista pool
+
+execute_pool_action:
+  description: >
+    Request state change for the pool, as opposed to the normal update 
+    mechanism, which only retrieves data from the servers.
+  fields:
+    pid:
+      description: >
+        The pool idnetification number (pid) 
+      example: 1234
+    action:
+      description: >
+        The action to be executed. Possible choices, depending on subscription options, include 'TBD', 'TBD'
+      example: TBD

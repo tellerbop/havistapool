@@ -1,0 +1,5 @@
+{
+    "name": "Vista Pool",
+    "domains": ["sensor"],
+    "homeassistant": "0.98.0"
+}

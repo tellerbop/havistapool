@@ -1,0 +1,10 @@
+{
+    "domain": "vistapool",
+    "name": "Vista Pool",
+    "config_flow": true,
+    "documentation": "https://github.com/tellerbop/havistapool",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": ["@tellerbop"]
+  }
+  

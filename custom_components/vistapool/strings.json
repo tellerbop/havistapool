@@ -1,0 +1,19 @@
+{
+    "config": {
+      "title": "Vista Pool",
+      "step": {
+        "user": {
+          "title": "Please fill in the information of your Vista Pool account and pool id",
+          "data": {
+            "username": "Username",
+            "password": "Password",                     
+            "scan_interval": "Scan interval"
+          }
+        }
+      },
+      "error": {
+        "invalid_credentials": "Login error, please check your username and password",
+        "invalid_username": "Invalid username"
+      }
+    }
+  }

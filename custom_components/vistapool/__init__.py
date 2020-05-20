@@ -1,0 +1,118 @@
+"""Support for Vista Pool."""
+from datetime import timedelta
+import voluptuous as vol
+
+import homeassistant.helpers.config_validation as cv
+from homeassistant.util.dt import utcnow
+from homeassistant import config_entries
+from homeassistant.const import (
+    CONF_NAME,
+    CONF_PASSWORD,
+    CONF_RESOURCES,
+    CONF_SCAN_INTERVAL,
+    CONF_USERNAME,
+    CONF_UNIT_SYSTEM_METRIC,
+    CONF_UNIT_SYSTEM_IMPERIAL
+)
+
+from .vistapool_account import VistaPoolAccount
+from .vistapool_services import VistaPoolService
+
+from .const import (
+    DOMAIN,    
+    CONF_MUTABLE,
+    DEFAULT_UPDATE_INTERVAL,
+    MIN_UPDATE_INTERVAL,
+    RESOURCES,
+    COMPONENTS,
+)
+
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_USERNAME): cv.string,
+                vol.Required(CONF_PASSWORD): cv.string,
+                vol.Optional(
+                    CONF_SCAN_INTERVAL,
+                    default=timedelta(minutes=DEFAULT_UPDATE_INTERVAL),
+                ): vol.All(
+                    cv.time_period,
+                    vol.Clamp(min=timedelta(minutes=MIN_UPDATE_INTERVAL)),
+                ),
+                vol.Optional(CONF_NAME, default={}): cv.schema_with_slug_keys(
+                    cv.string
+                ),
+                vol.Optional(CONF_RESOURCES): vol.All(
+                    cv.ensure_list, [vol.In(RESOURCES)]
+                )
+            }
+        )
+    },
+    extra=vol.ALLOW_EXTRA,
+)
+
+
+async def async_setup(hass, config):
+    if hass.config_entries.async_entries(DOMAIN):
+        return True
+
+    if DOMAIN not in config:
+        return True
+
+    names = config[DOMAIN].get(CONF_NAME)
+    if len(names) == 0:
+        return True
+
+    data = {}
+    data[CONF_USERNAME] = config[DOMAIN].get(CONF_USERNAME)
+    data[CONF_PASSWORD] = config[DOMAIN].get(CONF_PASSWORD)
+    data[CONF_SCAN_INTERVAL] = config[DOMAIN].get(CONF_SCAN_INTERVAL).seconds / 60
+    
+
+    hass.async_create_task(
+        hass.config_entries.flow.async_init(
+            DOMAIN, context={"source": config_entries.SOURCE_IMPORT}, data=data
+        )
+    )
+
+    return True
+
+
+async def async_setup_entry(hass, config_entry):
+    """Set up this integration using UI."""
+
+    if DOMAIN not in hass.data:
+        hass.data[DOMAIN] = {}
+
+    """Set up the Vistapool component."""
+    hass.data[DOMAIN]["devices"] = set()
+
+    account = config_entry.data.get(CONF_USERNAME)
+
+    unit_system = "metric"
+    if hass.config.units.name == CONF_UNIT_SYSTEM_IMPERIAL:
+        unit_system = "imperial"
+
+    if account not in hass.data[DOMAIN]:
+        data = hass.data[DOMAIN][account] = VistaPoolAccount(hass, config_entry, unit_system=unit_system)
+        data.init_connection()
+    else:
+        data = hass.data[DOMAIN][account]
+
+    return await data.update(utcnow())
+
+
+async def async_unload_entry(hass, config_entry):
+    account = config_entry.data.get(CONF_USERNAME)
+
+    data = hass.data[DOMAIN][account]
+
+    for component in COMPONENTS:
+        await hass.config_entries.async_forward_entry_unload(
+            data.config_entry, component
+        )
+
+    del hass.data[DOMAIN][account]
+
+    return True

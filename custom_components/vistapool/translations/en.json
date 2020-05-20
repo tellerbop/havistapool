@@ -1,0 +1,27 @@
+{
+    "config": {
+        "abort": {
+            "invalid_credentials": "Invalid credentials",
+            "user_already_configured": "Account has already been configured"
+        },
+        "create_entry": {
+        },
+        "error": {
+            "invalid_credentials": "Invalid credentials",
+            "invalid_username": "Invalid username",
+            "unexpected": "Unexpected error communicating with Vista Pool server",
+            "user_already_configured": "Account has already been configured"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "password": "Password",
+                    "username": "Username",                    
+                    "scan_interval": "Scan interval"
+                },
+                "title": "Vista Pool Account Info"
+            }
+        },
+        "title": "Vista Pool"
+    }
+}
