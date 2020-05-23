@@ -47,7 +47,7 @@ class VistaPoolService:
         self._api.use_token(self.vistaPoolToken)
 
         data = await self._api.get(
-            "http://vistapool.es/api/pool/{pid}?select=main%20modules%20light".format(
+            "http://vistapool.es/api/pool/{pid}?select=main%20modules%20light%20filtration".format(
                 pid=pid
             )
         )

@@ -296,6 +296,28 @@ class VistaPool:
             return True  
 
     @property
+    def filtration_state(self):        
+        check = self._pool.fields.get("filtration_state")
+        return check
+
+    @property
+    def filtration_supported(self):        
+        check = self._pool.fields.get("filtration_state")
+        result = parse_int(check)
+
+        if result == None: return False
+        else: return True 
+
+    @property
+    def filtration_type(self):        
+        check = self._pool.fields.get("filtration_type")
+        return check
+
+    @property
+    def filtration_type_supported(self):        
+        return True 
+
+    @property
     def ph_relay_state(self):
         if self.ph_relay_state_supported:        
             check = self._pool.fields.get("ph_relay_state")

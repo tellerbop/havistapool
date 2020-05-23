@@ -71,9 +71,7 @@ class VistaPoolAPI:
     def __get_headers(self):
         data = {
             "User-Agent": "PostmanRuntime/7.22.0",
-            "Accept": "*/*",
-            #"Content-Type": "application/json"
-            # "Accept": "application/json, application/vnd.vwg.mbb.vehicleDataDetail_v2_1_0+xml, application/vnd.vwg.mbb.genericError_v1_0_2+xml",
+            "Accept": "*/*",            
         }
         if self.__token != None:
             data["x-authtoken"] = self.__token.get("authToken")      
