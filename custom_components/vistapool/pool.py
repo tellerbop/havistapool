@@ -18,12 +18,12 @@ class PoolDataResponse:
     def __init__(self, data):
         self.data_fields = []        
         self.data_fields.append(Field("temperature", data["main"]["temperature"], "C"))
-        self.data_fields.append(Field("filtration_mode", data["main"]["filtrationMode"]))
-        self.data_fields.append(Field("filtration_status", data["main"]["filtrationStatus"]))
+        self.data_fields.append(Field("filtration_type", data["filtration"]["type"]))
+        self.data_fields.append(Field("filtration_state", data["filtration"]["onoff"]))
         self.data_fields.append(Field("light_type", data["light"]["type"]))
         self.data_fields.append(Field("light_status", data["light"]["status"]))
         self.data_fields.append(Field("ph", data["modules"]["ph"]["currentValue"]))
-        self.data_fields.append(Field("ph_hi", data["modules"]["ph"]["status"]["hi_value"]))
+        self.data_fields.append(Field("ph_target", data["modules"]["ph"]["status"]["hi_value"]))
         self.data_fields.append(Field("ph_relay_state", data["modules"]["ph"]["status"]["status"]))        
         self.data_fields.append(Field("ph_color", data["modules"]["ph"]["status"]["color"]["hex"]))
         self.data_fields.append(Field("rx", data["modules"]["rx"]["currentValue"]))

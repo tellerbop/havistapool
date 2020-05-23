@@ -230,12 +230,14 @@ def create_instruments():
         # Sensor(attr="location", name="Location", icon="mdi:map-marker", unit=None),
         Sensor(attr="temperature", name="Temperature", icon="mdi:thermometer", unit="C"),   
         Sensor(attr="ph", name="PH", icon="mdi:alpha-p-circle", unit="Ph"),
-        Sensor(attr="ph_hi", name="PH High Value", icon="mdi:alpha-p-box", unit="Ph"),   
+        Sensor(attr="ph_target", name="PH Target", icon="mdi:alpha-p-box", unit="Ph"),   
         Sensor(attr="rx", name="RX", icon="mdi:alpha-r-circle", unit="Rx"),   
         Sensor(attr="rx_target", name="RX Target", icon="mdi:alpha-r-box", unit="Rx"),           
+        Sensor(attr="filtration_type", name="Filtration Type", icon="mdi:filter",unit=""),           
         BinarySensor(attr="connected", name="Connected", device_class="connectivity"),        
-        BinarySensor(attr="rx_relay_state", name="Rx Relay State", device_class="opening"),        
-        BinarySensor(attr="ph_relay_state", name="Ph Relay State", device_class="opening"), 
+        BinarySensor(attr="rx_relay_state", name="Rx Relay State", device_class=""),        
+        BinarySensor(attr="ph_relay_state", name="Ph Relay State", device_class=""), 
+        BinarySensor(attr="filtration_state", name="Filtration State", device_class=""), 
         ]
 
 

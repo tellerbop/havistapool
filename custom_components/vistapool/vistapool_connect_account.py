@@ -249,14 +249,14 @@ class VistaPool:
             return True  
 
     @property
-    def ph_hi(self):        
-        if self.ph_hi_supported:
-            check = self._pool.fields.get("ph_hi")
+    def ph_target(self):        
+        if self.ph_target_supported:
+            check = self._pool.fields.get("ph_target")
             return parse_float(check)
     
     @property
-    def ph_hi_supported(self):      
-        check = self._pool.fields.get("ph_hi")
+    def ph_target_supported(self):      
+        check = self._pool.fields.get("ph_target")
         if check and parse_float(check):
             return True  
 
@@ -294,6 +294,28 @@ class VistaPool:
         check = self._pool.fields.get("rx_relay_state")
         if check:
             return True  
+
+    @property
+    def filtration_state(self):        
+        check = self._pool.fields.get("filtration_state")
+        return check
+
+    @property
+    def filtration_supported(self):        
+        check = self._pool.fields.get("filtration_state")
+        result = parse_int(check)
+
+        if result == None: return False
+        else: return True 
+
+    @property
+    def filtration_type(self):        
+        check = self._pool.fields.get("filtration_type")
+        return check
+
+    @property
+    def filtration_type_supported(self):        
+        return True 
 
     @property
     def ph_relay_state(self):
