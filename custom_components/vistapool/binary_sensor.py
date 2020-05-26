@@ -1,7 +1,7 @@
 """Support for Vista pool sensors."""
 import logging
 
-from homeassistant.components.binary_sensor import DEVICE_CLASSES, BinarySensorDevice
+from homeassistant.components.binary_sensor import DEVICE_CLASSES, BinarySensorEntity
 from homeassistant.const import CONF_USERNAME
 
 from .vistapool_entity import VistaPoolEntity
@@ -27,7 +27,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     async_add_entities(sensors)
 
 
-class VistaPoolSensor(VistaPoolEntity, BinarySensorDevice):
+class VistaPoolSensor(VistaPoolEntity, BinarySensorEntity):
     """Representation of an Vista Pool sensor."""
 
     @property

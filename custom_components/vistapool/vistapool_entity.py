@@ -69,7 +69,8 @@ class VistaPoolEntity(Entity):
     @property
     def device_info(self):
         return {
-            "identifiers": {(DOMAIN, self._instrument.name)},            
-            "name": self.name,
+            "identifiers": {(DOMAIN, self._instrument.pool_name)},            
+            "manufacturer": "VistaPool",
+            "name": self._pool_name,
             "device_type": self._component,
         }
