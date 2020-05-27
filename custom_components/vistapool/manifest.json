@@ -6,6 +6,7 @@
     "issue_tracker": "https://github.com/tellerbop/havistapool/issues",
     "requirements": [],
     "dependencies": [],
-    "codeowners": ["@tellerbop"]
-  }
-  
+    "codeowners": [
+        "@tellerbop"
+    ]
+}
